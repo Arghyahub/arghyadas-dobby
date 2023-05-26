@@ -1,0 +1,32 @@
+.form-wrap {
+    margin-top: 2rem;
+    border: 2px solid black;
+    padding: 3rem;
+    border-radius: 2rem;
+}
+
+#login-btns {
+    margin-bottom: 0.5rem ;
+    margin-top: -1rem;
+}
+
+.auth-btn {
+    padding: 0.3rem;
+    border-radius: 4px;
+}
+
+.auth-btn:hover {
+    background-color: rgb(127, 255, 47);
+}
+
+.auth-sub-btn {
+    margin-top: 0.7rem;
+}
+.auth-sub-btn:hover {
+    background-color: rgb(127, 255, 47);
+}
+
+.auth-warn {
+    color: red;
+    margin-top: 1rem;
+}

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Prompt&display=swap');
+
+/* 
+font-family: 'Merriweather', serif;
+font-family: 'Prompt', sans-serif; 
+*/
 * {
   padding: 0;
   margin: 0;
@@ -5,6 +11,14 @@
 
 html , body , #root {
   height: 100%;
+}
+
+label , button {
+  font-family: 'Prompt', sans-serif; 
+}
+
+h1 , h2 , h3 , p , div {
+  font-family: 'Merriweather', serif;
 }
 
 .fl-row {
@@ -45,4 +59,12 @@ html , body , #root {
 
 .w-100 {
   width: 100%;
+}
+
+.cp {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
 }

@@ -1,0 +1,48 @@
+.img-div {
+    max-width: 300px;
+    height: 300px;
+    /* overflow: hidden; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.user-img {
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+#navr {
+    position: absolute;
+    right: 1vw;
+}
+#navr>button {
+    padding: 0.1rem;
+}
+
+#navr>button:hover {
+    background-color: #c12d2d;
+    color: white;
+}
+
+.fade-in {
+    transition: height 0.9s ease-in-out;
+    border: 1px solid grey;
+    margin-bottom: 1rem;
+}
+
+.upload-img {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.home-form {
+    padding-top: 0.5rem;
+}
+
+.search-logo {
+    border: 1px solid grey;
+    object-fit: contain;
+}

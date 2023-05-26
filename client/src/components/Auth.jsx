@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React , { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import "./Auth.css"
 
 const backendURL = process.env.REACT_APP_BACKEND ;
 
@@ -22,14 +23,14 @@ const Auth = () => {
         method: 'POST',
         body: JSON.stringify({name,email,passwd}),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         }
       }) ;
       const json = await res.json() ;
       if (json.newAc){
-        setMsg("Account Signup successfull") ;
+        setMsg("Account Signup successfull , Go to Login Page") ;
       }else{
-        setMsg("Signup unsuccessful") ;
+        setMsg("User already exists") ;
       }
     }
     catch(err) {
@@ -60,7 +61,7 @@ const Auth = () => {
           navigate("/home") ;
         }, 1500);
       }else{
-        setMsg("Signup before making an account") ;
+        setMsg(json.msg) ;
       }
     }
     catch(err) {
@@ -69,13 +70,13 @@ const Auth = () => {
   }
 
   return (
-    <div className='fl-col jcen acen h-100'>
+    <div id='Auth' className='fl-col jcen acen h-100'>
       <h1>Welcome to The ImageStore</h1>
       <div className='form-wrap'>
 
-        <div className="fl-row">
-          <button onClick={ () =>setNewUser(true)}>Signup</button>
-          <button onClick={ () =>setNewUser(false)}>Login</button> 
+        <div id='login-btns' className="fl-row jcon-sar">
+          <button className='auth-btn cp' onClick={ () =>setNewUser(true)}>Signup</button>
+          <button className='auth-btn cp' onClick={ () =>setNewUser(false)}>Login</button> 
         </div>
 
         { NewUser ? (
@@ -86,7 +87,7 @@ const Auth = () => {
             <input type="text" name='email'/>
             <label htmlFor="password">Password</label>
             <input type="password" name='password'/>
-            <button type="submit" className='sub-btn'>Sign in</button>
+            <button type="submit" className='auth-sub-btn cp'>Sign in</button>
           </form>
           ) : (
           <form className='fl-col' onSubmit={loginAuth}>
@@ -94,12 +95,12 @@ const Auth = () => {
             <input type="text" name='email'/>
             <label htmlFor="password">Password</label>
             <input type="password" name='password'/>
-            <button type="submit" className='sub-btn'>Login</button>
+            <button type="submit" className='auth-sub-btn cp'>Login</button>
           </form>
           )
         }
       </div>
-      <p>{Msg}</p>
+      <p className='auth-warn'>{Msg}</p>
     </div>
   )
 }
