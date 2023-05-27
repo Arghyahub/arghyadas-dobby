@@ -71,7 +71,7 @@ const Auth = () => {
 
   return (
     <div id='Auth' className='fl-col jcen acen h-100'>
-      <h1>Welcome to The ImageStore</h1>
+      <h1 className='auth-head'>Welcome to The ImageStore</h1>
       <div className='form-wrap'>
 
         <div id='login-btns' className="fl-row jcon-sar">
