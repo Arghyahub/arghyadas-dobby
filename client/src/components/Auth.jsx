@@ -7,7 +7,7 @@ const backendURL = process.env.REACT_APP_BACKEND ;
 
 const Auth = () => {
   const [NewUser, setNewUser] = useState(true) ;
-  const [Msg, setMsg] = useState("Enter Data") ;
+  const [Msg, setMsg] = useState("") ;
   const navigate = useNavigate() ;
 
   const signinAuth = async (e) => {

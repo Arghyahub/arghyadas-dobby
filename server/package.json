@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "pm2 start index.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,6 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.1",
-    "multer": "^1.4.5-lts.1",
-    "nodemon": "^2.0.22"
+    "pm2": "^5.3.0"
   }
 }
