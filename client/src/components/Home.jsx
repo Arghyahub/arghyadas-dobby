@@ -66,17 +66,17 @@ const Home = () => {
 		try {
 			const resp = await fetch(`${backendURL}/postImg`, {
 				method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          "authorization": localStorage.getItem("token")
-        },
+			headers: {
+			'Content-Type': 'application/json',
+			"authorization": localStorage.getItem("token")
+			},
 				body: JSON.stringify({ name , image: base64})
 			})
-      const json = await resp.json() ;
-      console.log(json) ;
+			const json = await resp.json() ;
+			console.log(json) ;
 
 			checkUser() ;
-      setUploadClick(!UploadClick)
+      		setUploadClick(!UploadClick)
 		}
 		catch (err) {
 			console.log(err);
@@ -88,6 +88,21 @@ const Home = () => {
     localStorage.removeItem("token");
     setImages([]) ;
     navigate("/") ;
+  }
+
+  const delImg = async (id) => {
+	// Delete the image
+	const res = await fetch(`${backendURL}/delImg`, {
+		method:"DELETE",
+		headers:{
+			"content-type":"application/json",
+			"Authorization":localStorage.getItem('token'),
+		},
+		body:JSON.stringify({"_id": id})
+	}) ;
+	if (res.ok){
+		checkUser() ;
+	}
   }
 
 
@@ -140,9 +155,12 @@ const Home = () => {
             { (searchFilter==="") ? 
               Images.map((Imge,ind) => (
                 <div key={ind}>
-                  {console.log(Images.length)}
+                  {/* {console.log(Imge)} */}
                   <div className="img-div fl-col">
-                    <img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
+					<div style={{position: "relative"}}>
+                    	<img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
+						<button className='del-btn' onClick={() => delImg(Imge._id)} >&times;</button>
+					</div>
                     <p>{Imge.name}</p>
                   </div>
                 </div>
@@ -154,7 +172,9 @@ const Home = () => {
                   {console.log(Images.length)}
                   { ( Imge.name.toLowerCase() === searchFilter.toLowerCase()) && (
                     <div className="img-div fl-col">
-                      <img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
+						<div>
+                      		<img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
+						</div>
                       <p>{Imge.name}</p>
                     </div>
                   )

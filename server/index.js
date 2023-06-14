@@ -175,6 +175,10 @@ app.post("/postImg", async (req, res) => {
     }
 })
 
+app.delete("/delImg",(req,res) => {
+    // Implement Authentication
+})
+
 
 app.listen(5000, () => {
     console.log("Listening on http://localhost:5000/");
