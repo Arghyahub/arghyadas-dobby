@@ -70,3 +70,29 @@
     background-color: #e03434;
     opacity: 0.9;
 }
+
+.del-conf {
+    border: 1px solid grey;
+    padding: 3rem 1.2rem;
+    max-width: 300px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 10;
+    border-radius: 1rem;
+    background-color: white;
+}
+
+.confbtn-div {
+    margin-top: 2rem;
+}
+
+.bg-opac {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+}

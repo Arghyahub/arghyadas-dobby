@@ -175,8 +175,24 @@ app.post("/postImg", async (req, res) => {
     }
 })
 
-app.delete("/delImg",(req,res) => {
-    // Implement Authentication
+app.delete("/delImg",async (req,res) => {
+    const imgId = req.body.id ;
+    const token = req.headers["authorization"];
+    if (token === undefined || token === null){
+        return res.send(404).json({message : "User not found"}) ;
+    }
+    const decoded = jwt.verify(token,secretKey) ;
+    try {
+        await User.updateOne({id: decoded.id}, {
+            $pull : {
+                images: { _id : imgId }
+            }
+        })
+        res.status(200).json({message: "successfully deleted"}) ;
+    }
+    catch (err) {
+        res.status(500).json({message: "some error occured" , error : err}) ;
+    }
 })
 
 
