@@ -15,6 +15,10 @@ const Home = () => {
 	const [searchFilter, setsearchFilter] = useState("");
 	const [ImgDel, setImgDel] = useState("") ;
 	const [ImgDelStatus, setImgDelStatus] = useState(false) ;
+	const [ChangeNameState, setChangeNameState] = useState(false) ;
+	const [ChangeNameId, setChangeNameId] = useState("") ;
+	const [NewName, setNewName] = useState("") ;
+
 
 	const checkUser = async () => {
 		if (localStorage.getItem("token") === undefined || localStorage.getItem("token") === null) {
@@ -106,6 +110,25 @@ const Home = () => {
 		}
 	}
 
+	const changeName = async () => {
+		const res = await fetch(`${backendURL}/updateName`,{
+			method:"PUT",
+			headers : {
+				'content-type' : "application/json",
+				"Authorization" : localStorage.getItem('token')
+			},
+			body : JSON.stringify({ id: ChangeNameId , name: NewName }) 
+		});
+		setChangeNameState(false) ;
+		if (res.ok){
+			// set message
+			checkUser() ;
+		}
+		else {
+			// Set message
+		}
+	}
+
 
 	return (
 		<div className="flex-col hi-100">
@@ -162,7 +185,7 @@ const Home = () => {
 											<img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
 											<button className='del-btn' onClick={() => { setImgDel(Imge._id) ; setImgDelStatus(true) } } >&times;</button>
 										</div>
-										<p>{Imge.name}</p>
+										<p>{Imge.name} <button className='edit-btn' onClick={() => { setChangeNameId(Imge._id) ; setChangeNameState(true) } }>✏️</button> </p>
 									</div>
 								</div>
 							))
@@ -204,6 +227,16 @@ const Home = () => {
 				</>
 			)}
 
+			{ ChangeNameState && (
+				<>
+				<div className='del-conf fl-col acen tcen'>
+					New Image Name
+					<input type="text" className='change-name-ip' onChange={(e) => setNewName(e.target.value)} />
+					<div className='fl-row jcon-sar acen w-100 confbtn-div'><button onClick={changeName}>Update</button> <button onClick={() => setChangeNameState(false) }>Cancel</button> </div>
+				</div>
+				<div className='bg-opac'></div>
+				</>
+			)}
 
 		</div>
 	)

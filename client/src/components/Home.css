@@ -96,3 +96,15 @@
     position: absolute;
     background-color: rgba(0, 0, 0, 0.6);
 }
+
+.edit-btn {
+    outline: none;
+    border: none;
+    font-size: 10px;
+    position: relative;
+    top: -5px;
+}
+
+.change-name-ip {
+    margin-top: 15px;
+}

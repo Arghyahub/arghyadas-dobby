@@ -193,6 +193,29 @@ app.delete("/delImg",async (req,res) => {
 })
 
 
+app.put("/updateName",async (req,res) => {
+    const id = req.body.id ;
+    const token = req.headers["authorization"] ;
+    if (token===undefined || token===null){
+        return res.status(404).json({message: "User token not found"}) ;
+    }
+    const decodedUser = jwt.verify(token,secretKey) ;
+
+    try {
+        await User.updateOne({ id: decodedUser.id , 'images._id': id }, {
+            $set : {
+                'images.$.name' : req.body.name
+            }
+        });
+        res.status(202).json({ message :"Name successfully updated"});
+    }
+    catch(err) {
+        console.log(err) ;
+        res.status(500).json({message : "Some error occured"}) ;
+    }
+})
+
+
 app.listen(5000, () => {
     console.log("Listening on http://localhost:5000/");
 })
