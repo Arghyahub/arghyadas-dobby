@@ -70,6 +70,7 @@ const Home = () => {
 		const base64 = await convertBase64(img);
 
 		try {
+			setUploadClick(!UploadClick)
 			await fetch(`${backendURL}/postImg`, {
 				method: "POST",
 				headers: {
@@ -80,7 +81,6 @@ const Home = () => {
 			})
 
 			checkUser();
-			setUploadClick(!UploadClick)
 		}
 		catch (err) {
 			console.log(err);
@@ -219,7 +219,7 @@ const Home = () => {
 
 			{ ImgDelStatus && (
 				<>
-				<div className='del-conf fl-col acen tcen'>
+				<div className={`del-conf fl-col acen tcen ${ImgDel? 'show-conf':''}`}>
 					Do you really want to delete the image?
 					<div className='fl-row jcon-sar acen w-100 confbtn-div'><button onClick={delImg}>Delete</button> <button onClick={() => { setImgDel("") ; setImgDelStatus(false) }}>Cancel</button> </div>
 				</div>
@@ -229,7 +229,7 @@ const Home = () => {
 
 			{ ChangeNameState && (
 				<>
-				<div className='del-conf fl-col acen tcen'>
+				<div className={`del-conf fl-col acen tcen ${ChangeNameState? 'show-conf':''}`}>
 					New Image Name
 					<input type="text" className='change-name-ip' onChange={(e) => setNewName(e.target.value)} />
 					<div className='fl-row jcon-sar acen w-100 confbtn-div'><button onClick={changeName}>Update</button> <button onClick={() => setChangeNameState(false) }>Cancel</button> </div>
