@@ -7,9 +7,18 @@ const backendURL = process.env.REACT_APP_BACKEND ;
 
 const Auth = () => {
   const [NewUser, setNewUser] = useState(true) ;
-  const [Msg, setMsg] = useState("") ;
+  const [Msg, setMsg] = useState("Some Warning") ;
+  const [WarnModel, setWarnModel] = useState(false) ;
   const navigate = useNavigate() ;
 
+  const handelWarn = (text) => {
+    setMsg(text) ;
+    setWarnModel(true) ;
+    setTimeout(()=> {
+      setWarnModel(false) ;
+    },2300)
+  }
+ 
   const signinAuth = async (e) => {
     e.preventDefault() ;
     const data = new FormData(e.target) ;
@@ -28,9 +37,14 @@ const Auth = () => {
       }) ;
       const json = await res.json() ;
       if (json.newAc){
-        setMsg("Account Signup successfull , Go to Login Page") ;
+        handelWarn("Account Signup successfull") ;
+        localStorage.setItem("token",json.token) ;
+        setTimeout(() => {
+          navigate("/home") ;
+        }, 2500);
       }else{
-        setMsg("User already exists") ;
+        setWarnModel(true) ;
+        handelWarn("User already exists") ;
       }
     }
     catch(err) {
@@ -55,13 +69,13 @@ const Auth = () => {
       }) ;
       const json = await res.json() ;
       if (json.acExist){
-        setMsg("Account Login successfull ,Redirecting to home page") ;
+        handelWarn("Account Login successfull") ;
         localStorage.setItem("token", json.token);
         setTimeout(() => {
           navigate("/home") ;
         }, 1500);
       }else{
-        setMsg(json.msg) ;
+        handelWarn(json.msg) ;
       }
     }
     catch(err) {
@@ -70,37 +84,40 @@ const Auth = () => {
   }
 
   return (
-    <div id='Auth' className='fl-col jcen acen h-100'>
+    <div id='Auth' className='fl-col acen h-100'>
       <h1 className='auth-head'>Welcome to The ImageStore</h1>
-      <div className='form-wrap'>
+      <div className='fl-col jcen acen f1'>
+        <div className='form-wrap'>
 
-        <div id='login-btns' className="fl-row jcon-sar">
-          <button className='auth-btn cp' onClick={ () =>setNewUser(true)}>Signup</button>
-          <button className='auth-btn cp' onClick={ () =>setNewUser(false)}>Login</button> 
+          { NewUser ? (
+            <>
+            <form className='fl-col' onSubmit={signinAuth}>
+              <label className='auth-label' htmlFor="name">Name</label>
+              <input className='auth-ip' type="text" name='name'/>
+              <label className='auth-label' htmlFor="email">Email</label>
+              <input className='auth-ip' type="text" name='email'/>
+              <label className='auth-label' htmlFor="password">Password</label>
+              <input className='auth-ip' type="password" name='password'/>
+              <button type="submit" className='auth-sub-btn cp'>Sign Up</button>
+            </form>
+            <div className='acnt-avail' >Already have an account? <button className='acnt-avil-btn' onClick={() => setNewUser(false) } >Login..</button> </div>
+            </>
+            ) : (
+            <>
+            <form className='fl-col' onSubmit={loginAuth}>
+              <label className='auth-label' htmlFor="email">Email</label>
+              <input className='auth-ip' type="text" name='email'/>
+              <label className='auth-label' htmlFor="password">Password</label>
+              <input className='auth-ip' type="password" name='password'/>
+              <button type="submit" className='auth-sub-btn cp'>Login</button>
+            </form>
+            <div className='acnt-avail' >Don't have an account? <button className='acnt-avil-btn' onClick={() => setNewUser(true) } >Signup..</button> </div>
+            </>
+            )
+          }
         </div>
-
-        { NewUser ? (
-          <form className='fl-col' onSubmit={signinAuth}>
-            <label htmlFor="name">Name</label>
-            <input type="text" name='name'/>
-            <label htmlFor="email">Email</label>
-            <input type="text" name='email'/>
-            <label htmlFor="password">Password</label>
-            <input type="password" name='password'/>
-            <button type="submit" className='auth-sub-btn cp'>Sign in</button>
-          </form>
-          ) : (
-          <form className='fl-col' onSubmit={loginAuth}>
-            <label htmlFor="email">Email</label>
-            <input type="text" name='email'/>
-            <label htmlFor="password">Password</label>
-            <input type="password" name='password'/>
-            <button type="submit" className='auth-sub-btn cp'>Login</button>
-          </form>
-          )
-        }
-      </div>
-      <p className='auth-warn'>{Msg}</p>
+        <p className={`auth-warn ${WarnModel ? 'warn-vis' : ''}`}>{Msg}</p>
+        </div>
     </div>
   )
 }

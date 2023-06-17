@@ -76,9 +76,10 @@ app.post("/signin", async (req, res) => {
 
         const data = { id: numofData + 1, name, email, passwd: hashedPasswd, images: [] } ;
         // console.log(data);
+        const token = jwt.sign({ id: data.id }, secretKey);
         const newUser = new User(data) ;
         await newUser.save() ;
-        res.status(200).json({ newAc: true });
+        res.status(200).json({ newAc: true , token });
     }
     catch (err) {
         console.log(err);
@@ -93,15 +94,11 @@ app.post("/login", async (req, res) => {
 
         const user = await User.findOne({email: email}) ;
 
-        // const user = USERS.find((allusers) => {
-        //     return (allusers.email === email)
-        // })
-
         if (!user) {
             return res.status(200).json({ acExist: false, msg: "User Doesn't exist" });
         }
         else {
-            const isPasswordValid = await bcrypt.compare(passwd, user.passwd);
+            const isPasswordValid = bcrypt.compare(passwd, user.passwd);
             if (isPasswordValid) {
                 const token = jwt.sign({ id: user.id }, secretKey);
                 res.status(200).json({ acExist: true, token });
