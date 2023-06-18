@@ -9,10 +9,21 @@
     object-fit: contain;
 }
 
+.logo {
+    filter: invert(1);
+}
+
 .user-img {
     max-width: 300px;
     max-height: 300px;
     object-fit: contain;
+}
+
+#navbar {
+    background-color: #181823;
+    position: sticky;
+    top: 0;
+    color: white;
 }
 
 #navr {
@@ -23,9 +34,17 @@
     padding: 0.1rem;
 }
 
-#navr>button:hover {
+.logout-btn:hover {
     background-color: #c12d2d;
     color: white;
+    border-radius: 0.2rem;
+}
+
+.logout-btn {
+    outline: none;
+    border: none;
+    background-color: #181823;
+    color: #ffff;
 }
 
 .fade-in {
@@ -41,11 +60,48 @@
 
 .home-form {
     padding-top: 0.5rem;
+    overflow: hidden;
+    animation: heightinc 1s ease-in-out;
+}
+
+@keyframes heightinc {
+    0% {
+        height: 0px;
+    }
+    100% {
+        height: 90px;
+    }
 }
 
 .search-logo {
-    border: 1px solid grey;
+    border: 2px solid black;
+    border-right: 0;
+    border-radius: 50% 0 0 50%;
     object-fit: contain;
+}
+
+.search-logo > img {
+    height: 20px;
+    padding: 0.3rem;
+}
+
+.search-ip {
+    outline: none;
+    border-left: 0;
+    border-right: 0;
+}
+
+.search-cross {
+    border-radius: 0 50% 50% 0;
+    border-left: 0;
+    outline: none;
+    padding: 0 0.5rem;
+    background-color: white;
+    font-size: 15px;
+}
+
+.search-cross:hover {
+    color: red;
 }
 
 .del-btn {
@@ -126,3 +182,6 @@
     margin-top: 15px;
 }
 
+.personal-img {
+    margin-top: 1rem;
+}

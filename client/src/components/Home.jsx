@@ -133,14 +133,14 @@ const Home = () => {
 	return (
 		<div className="flex-col hi-100">
 
-			<div id="navbar" className='fl-row acen' style={{ position: 'sticky', top: '0', backgroundColor: 'white' }}>
+			<div id="navbar" className='fl-row acen'>
 				<div id="navl" className='fl-row acen'>
-					<img src="logo.png" alt="logo" />
+					<img className='logo' src="logo.png" alt="logo" />
 					The ImageStore
 				</div>
 				{LoggedIn && (
 					<div id="navr">
-						<button className='cp' onClick={handleLogout}>Logout</button>
+						<button className='cp logout-btn' onClick={handleLogout}>Logout</button>
 					</div>
 				)}
 			</div>
@@ -169,9 +169,9 @@ const Home = () => {
 					</div>
 
 					<div className='fl-row w-100 jcen'>
-						<div className='search-logo'><img src="search.png" alt="search" /></div>
-						<input type="text" onChange={(event) => setsearchFilter(event.target.value)} ref={inputRef} />
-						<button onClick={() => { inputRef.current.value = ""; setsearchFilter("") }}>Clear</button>
+						<div className='search-logo fl-row jcen acen'><img src="search.png" alt="search" /></div>
+						<input className='search-ip' type="text" onChange={(event) => setsearchFilter(event.target.value)} ref={inputRef} />
+						<button className='search-cross' onClick={() => { inputRef.current.value = ""; setsearchFilter("") }}>X</button>
 					</div>
 
 					<div className="fl-row jcon-sar fwrap f1 personal-img">
@@ -192,8 +192,6 @@ const Home = () => {
 							:
 							Images.map((Imge, ind) => (
 								<div key={ind}>
-
-									{console.log(Images.length)}
 									{(Imge.name.toLowerCase() === searchFilter.toLowerCase()) && (
 										<div className="img-div fl-col">
 											<div>
