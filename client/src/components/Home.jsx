@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 import "./Home.css";
+import Trie from "./search/trie"
+let trie = new Trie() ;
 const backendURL = process.env.REACT_APP_BACKEND;
 
 const Home = () => {
@@ -13,6 +15,7 @@ const Home = () => {
 	const [UploadClick, setUploadClick] = useState(false);
 	const [Images, setImages] = useState([]);
 	const [searchFilter, setsearchFilter] = useState("");
+	const [searchImage, setsearchImage] = useState([]);
 	const [ImgDel, setImgDel] = useState("") ;
 	const [ImgDelStatus, setImgDelStatus] = useState(false) ;
 	const [ChangeNameState, setChangeNameState] = useState(false) ;
@@ -33,8 +36,12 @@ const Home = () => {
 			})
 			setLoggedIn(true);
 			const json = await resp.json();
+			trie = new Trie() ;
+			json.images.forEach(elem => {
+				trie.insertWord(elem.name,elem.link) ;
+			});
 			setImages(json.images);
-			console.log(json.images);
+			// console.log(json.images);
 		}
 		catch (err) {
 			setLoggedIn(false);
@@ -170,7 +177,7 @@ const Home = () => {
 
 					<div className='fl-row w-100 jcen'>
 						<div className='search-logo fl-row jcen acen'><img src="search.png" alt="search" /></div>
-						<input className='search-ip' type="text" onChange={(event) => setsearchFilter(event.target.value)} ref={inputRef} />
+						<input className='search-ip' type="text" onChange={(event) => {setsearchFilter(event.target.value) ; setsearchImage(trie.getWords(event.target.value)) }} ref={inputRef} />
 						<button className='search-cross' onClick={() => { inputRef.current.value = ""; setsearchFilter("") }}>X</button>
 					</div>
 
@@ -179,7 +186,6 @@ const Home = () => {
 						{(searchFilter === "") ?
 							Images.map((Imge, ind) => (
 								<div key={ind}>
-									{/* {console.log(Imge)} */}
 									<div className="img-div fl-col">
 										<div style={{ position: "relative" }}>
 											<img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
@@ -190,19 +196,36 @@ const Home = () => {
 								</div>
 							))
 							:
-							Images.map((Imge, ind) => (
-								<div key={ind}>
-									{(Imge.name.toLowerCase() === searchFilter.toLowerCase()) && (
+							searchImage.map((Imge, ind) => (
+								/*
+								{name: 'FIGHT CLUB', links: Array(1)}
+								*/
+								Imge.links.map((urls) => (
+									<div key={ind}>
 										<div className="img-div fl-col">
 											<div>
-												<img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
+												<img src={urls} alt={Imge.name} key={Imge.name} className='user-img' />
 											</div>
-											<p>{Imge.name}</p>
+											<p className='search-name'>{Imge.name.toLowerCase()}</p>
 										</div>
-									)
-									}
+							 		</div>
+								))
+								
 
-								</div>
+								// <div key={ind}>
+								// 	{console.log(searchImage)}
+								// 	{(Imge.name.toLowerCase() === searchFilter.toLowerCase()) && (
+								// 		<div className="img-div fl-col">
+								// 			<div>
+								// 				<img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
+								// 			</div>
+								// 			<p>{Imge.name}</p>
+								// 		</div>
+								// 	)
+								// 	}
+
+								// </div>
+
 							))
 						}
 

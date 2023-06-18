@@ -104,6 +104,10 @@
     color: red;
 }
 
+.search-name {
+    text-transform: capitalize;
+}
+
 .del-btn {
     position: absolute ;
     top: 0;

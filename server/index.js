@@ -144,7 +144,6 @@ app.post("/postImg", async (req, res) => {
     try {
         cloudinary.uploader.upload(imgPath, opts, async (error, result) => {
             if (result && result.secure_url) {
-                console.log(result.secure_url);
                 const imageDetails = {
                     name: name,
                     link: result.secure_url

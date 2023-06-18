@@ -1,26 +1,26 @@
 class Node {
     constructor() {
-        this.child = new Array(26) ;
+        this.child = new Array(97) ;
         this.pref = 0;
         this.end = 0;
         this.links = [] ;
     }
 
     exist = (ch) => {
-        ch = ch.toLowerCase();
-        const num = ch.charCodeAt(0) - 97  ;
-        return this.child[ num ] != undefined ;
+        ch = ch.toUpperCase();
+        const num = ch.charCodeAt(0)  ;
+        return this.child[ num ] !== undefined ;
     }
 
     push = (ch) => {
-        ch = ch.toLowerCase();
-        const num = ch.charCodeAt(0) - 97 ;
+        ch = ch.toUpperCase();
+        const num = ch.charCodeAt(0) ;
         this.child[ num ] = new Node() ;
     }
 
     get = (ch) => {
-        ch = ch.toLowerCase();
-        const num = ch.charCodeAt(0) - 97 ;
+        ch = ch.toUpperCase();
+        const num = ch.charCodeAt(0) ;
         return this.child[num] ;
     }
 }
@@ -31,7 +31,7 @@ class Trie {
     insertWord = (str , link) => {
         let node = this.root;
         for (let i=0; i<str.length; i++){
-            const ch = str[i].toLowerCase() ;
+            const ch = str[i].toUpperCase() ;
             if (node.exist(ch) ){
                 node = node.get(ch) ;
             }
@@ -47,10 +47,10 @@ class Trie {
 
     getWordsUtil = (node , ans , arr) => {
         if (node.end>0){
-            ans.push({str: arr.join("") , links : node.links}) ;
+            ans.push({name: arr.join("") , links : node.links}) ;
         }
         
-        for (let i=97; i<=122; i++){
+        for (let i=0; i<97; i++){
             const ch = String.fromCharCode(i) ;
             if (node.exist(ch)){
                 arr.push(ch) ;
@@ -61,14 +61,14 @@ class Trie {
     }
 
     getWords = (str) => {
-        if (str.length == 0)
+        if (str.length === 0)
             return [] ;
         const ans = [] ;
         const arr = [] ;
         let node = this.root;
 
         for (let i=0; i<str.length; i++){
-            const ch = str[i].toLowerCase() ;
+            const ch = str[i].toUpperCase() ;
             if (node.exist(ch)){
                 node = node.get(ch) ;
                 arr.push(ch) ;
