@@ -241,8 +241,13 @@ const Home = () => {
 			{ ImgDelStatus && (
 				<>
 				<div className={`del-conf fl-col acen tcen ${ImgDel? 'show-conf':''}`}>
-					Do you really want to delete the image?
-					<div className='fl-row jcon-sar acen w-100 confbtn-div'><button onClick={delImg}>Delete</button> <button onClick={() => { setImgDel("") ; setImgDelStatus(false) }}>Cancel</button> </div>
+					<p>
+						Do you really want to delete the image?
+					</p>
+					<div className='fl-row jcon-sar acen w-100 confbtn-div'>
+						<button className='model-ac' onClick={delImg}>Delete</button> 
+						<button className='model-na' onClick={() => { setImgDel("") ; setImgDelStatus(false) }}>Cancel</button> 
+					</div>
 				</div>
 				<div className='bg-opac'></div>
 				</>
@@ -251,9 +256,14 @@ const Home = () => {
 			{ ChangeNameState && (
 				<>
 				<div className={`del-conf fl-col acen tcen ${ChangeNameState? 'show-conf':''}`}>
-					New Image Name
+					<p>
+						New Image Name
+					</p>
 					<input type="text" className='change-name-ip' onChange={(e) => setNewName(e.target.value)} />
-					<div className='fl-row jcon-sar acen w-100 confbtn-div'><button onClick={changeName}>Update</button> <button onClick={() => setChangeNameState(false) }>Cancel</button> </div>
+					<div className='fl-row jcon-sar acen w-100 confbtn-div'>
+						<button className='model-ac' onClick={changeName}>Update</button> 
+						<button className='model-na' onClick={() => setChangeNameState(false) }>Cancel</button> 
+					</div>
 				</div>
 				<div className='bg-opac'></div>
 				</>

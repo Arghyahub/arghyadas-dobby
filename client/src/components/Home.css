@@ -145,6 +145,7 @@
     border-radius: 1rem;
     background-color: white;
     transition: all 1s ease-in-out;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
 .show-conf {
@@ -172,7 +173,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    position: absolute;
+    position: fixed;
     background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -233,4 +234,30 @@
         font-size: 0.1rem;
         opacity: 0.5;
     }
+}
+
+.model-ac {
+    border: none;
+    outline: none;
+    border-radius: 0.2rem;
+    padding: 0.1rem;
+    background: #eee;
+    box-shadow: 0 8px 8px -4px lightblue;
+}
+
+.model-ac:hover {
+    background-color: rgb(152, 240, 152);
+}
+
+.model-na {
+    border: none;
+    outline: none;
+    border-radius: 0.2rem;
+    padding: 0.1rem;
+    background: #eee;
+  box-shadow: 0 8px 8px -4px lightblue;
+}
+
+.model-na:hover {
+    background-color: rgb(243, 134, 134);
 }
