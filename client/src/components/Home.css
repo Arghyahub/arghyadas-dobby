@@ -24,6 +24,8 @@
     position: sticky;
     top: 0;
     color: white;
+    height: 40px;
+    z-index: 15;
 }
 
 #navr {
@@ -188,4 +190,47 @@
 
 .personal-img {
     margin-top: 1rem;
+}
+
+.prompt-model {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: (50%,0);
+    color: #ce1616;
+    background-color: #ffff;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    display: none;
+    transform: translate(-50%,0);
+}
+
+.model-anim {
+    animation: showprompt 3s ease-in-out;
+    display: block;
+}
+@keyframes showprompt {
+    0% {
+        padding: 0;
+        font-size: 0.1rem;
+        opacity: 0.5;
+    }
+    40% {
+        padding: 0.2rem;
+        transform: translate(-50%,100px);
+        font-size: 0.9rem;
+        opacity: 1;
+    }
+    60% {
+        padding: 0.2rem;
+        transform: translate(-50%,100px);
+        font-size: 0.9rem;
+        opacity: 1;
+    }
+    100% {
+        padding: 0;
+        font-size: 0.1rem;
+        opacity: 0.5;
+    }
 }

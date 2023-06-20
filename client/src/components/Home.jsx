@@ -21,7 +21,8 @@ const Home = () => {
 	const [ChangeNameState, setChangeNameState] = useState(false) ;
 	const [ChangeNameId, setChangeNameId] = useState("") ;
 	const [NewName, setNewName] = useState("") ;
-
+	const [PromptModel, setPromptModel] = useState("Something") ;
+	const [PromptActive, setPromptActive] = useState(false) ;
 
 	const checkUser = async () => {
 		if (localStorage.getItem("token") === undefined || localStorage.getItem("token") === null) {
@@ -44,6 +45,7 @@ const Home = () => {
 			// console.log(json.images);
 		}
 		catch (err) {
+			handleModel("Unable to login") ;
 			setLoggedIn(false);
 			console.log(err);
 		}
@@ -52,7 +54,7 @@ const Home = () => {
 	useEffect(() => {
 		checkUser();
 		// Call the function
-	}, [])
+	})
 
 	const convertBase64 = (file) => {
 		return new Promise((resolve, reject) => {
@@ -78,6 +80,7 @@ const Home = () => {
 
 		try {
 			setUploadClick(!UploadClick)
+			handleModel("Uploading Image...") ;
 			await fetch(`${backendURL}/postImg`, {
 				method: "POST",
 				headers: {
@@ -90,6 +93,7 @@ const Home = () => {
 			checkUser();
 		}
 		catch (err) {
+			handleModel("Some error occured") ;
 			console.log(err);
 		}
 	}
@@ -115,6 +119,9 @@ const Home = () => {
 			setImgDel("") ;
 			setImgDelStatus(false) ;
 		}
+		else {
+			handleModel("Unable to Delete") ;
+		}
 	}
 
 	const changeName = async () => {
@@ -128,12 +135,20 @@ const Home = () => {
 		});
 		setChangeNameState(false) ;
 		if (res.ok){
-			// set message
+			handleModel("Successfully changed") ;
 			checkUser() ;
 		}
 		else {
-			// Set message
+			handleModel("Some error occured") ;
 		}
+	}
+
+	const handleModel = (str) => {
+		setPromptModel(str) ;
+		setPromptActive(true) ;
+		setTimeout(() => {
+			setPromptActive(false) ;
+		}, 3000);
 	}
 
 
@@ -210,21 +225,6 @@ const Home = () => {
 										</div>
 							 		</div>
 								))
-								
-
-								// <div key={ind}>
-								// 	{console.log(searchImage)}
-								// 	{(Imge.name.toLowerCase() === searchFilter.toLowerCase()) && (
-								// 		<div className="img-div fl-col">
-								// 			<div>
-								// 				<img src={Imge.link} alt={Imge.name} key={Imge.name} className='user-img' />
-								// 			</div>
-								// 			<p>{Imge.name}</p>
-								// 		</div>
-								// 	)
-								// 	}
-
-								// </div>
 
 							))
 						}
@@ -258,6 +258,10 @@ const Home = () => {
 				<div className='bg-opac'></div>
 				</>
 			)}
+
+			<div className={`prompt-model ${PromptActive? 'model-anim' : ''}`}>
+				{PromptModel}
+			</div>
 
 		</div>
 	)
