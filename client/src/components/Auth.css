@@ -5,7 +5,7 @@ font-family: 'Raleway', sans-serif;
 */
 
 #Auth {
-    background-color: #ECF2FF;
+    background-color: #F9FAFE;
 }
 
 
@@ -33,6 +33,7 @@ font-family: 'Raleway', sans-serif;
     font-size: 1rem;
     border-radius: 1rem;
     padding: 5px 0;
+    width: 70%;
 }
 .auth-sub-btn:hover {
     background-color: rgb(127, 255, 47);
@@ -58,19 +59,13 @@ font-family: 'Raleway', sans-serif;
 }
 
 .auth-head {
-    margin-top: 2rem;
+    margin-top: 4rem;
     text-align: center;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Merriweather', serif;
 }
 
 .auth-label {
     font-size: 1.4rem;
-}
-
-.auth-ip {
-    height: 25px;
-    width: 300px;
-    background-color: #ffff;
 }
 
 .acnt-avail {
@@ -81,4 +76,75 @@ font-family: 'Raleway', sans-serif;
     outline: none;
     background-color: inherit;
     text-decoration: underline;
+}
+
+
+.auth-img {
+    height: 100%;
+    width: 40%;
+    object-fit: cover;
+}
+
+.auth-form {
+    width: 60%;
+    height: 100%;
+}
+
+.auth-desc {
+    width: 80%;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.ip {
+    margin: 0.8rem 0;
+    background-color: #e8e9fd;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 6px -9px black;
+    padding-right: 0.3rem;
+}
+
+.ip > img {
+    height: 20px;
+}
+.ip:hover {
+    box-shadow: 0 8px 8px -1px lightblue;
+}
+.auth-ip {
+    width: 300px;
+    height: 33px;
+    background-color: #eeeefc;
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    padding-left: 1rem;
+}
+.pass-btn {
+    outline: none;
+    border: none;
+    background-color: #e8e9fd;
+    border-radius: 0.5rem;
+}
+.pass-btn > img {
+    height: 25px;
+}
+
+@media screen and (max-width: 630px) {
+    .auth-img {
+        display: none;
+        width: 0;
+    }
+    .auth-form {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .auth-desc {
+        font-size: 0.8rem;
+    }
+    .auth-ip {
+        width: 250px;
+    }
 }

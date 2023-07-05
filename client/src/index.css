@@ -17,8 +17,11 @@ label , button {
   font-family: 'Prompt', sans-serif; 
 }
 
-h1 , h2 , h3 , p , div {
+h1 , h2 , h3 , div {
   font-family: 'Merriweather', serif;
+}
+p {
+  font-family: 'Prompt', sans-serif;
 }
 
 .fl-row {
